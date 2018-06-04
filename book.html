@@ -1,0 +1,227 @@
+<?php 
+    
+    include "assets/php/proses.php";
+ 
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FP_15</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/slide.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/angular.min.js"></script>
+
+    <!-- <style type="text/css">
+        tr{
+          border: 1px solid black;
+        }
+        td{
+          border: 1px solid red;
+        }
+    </style> -->
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
+</head>
+
+<body style="background-image:url(&quot;assets/img/background.png&quot;);">
+    <nav class="navbar navbar-light navbar-expand-md fixed-top navigasi">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/img/ef_logo_grey.png" class="logo-grey">
+            </a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+                class="collapse navbar-collapse navbar-grey" id="navcol-1">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="index.html">HOME</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="gallery.html">GALLERY</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="paket.html">PHOTO PACKAGE</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="contact.html">CONTACT US</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="d-flex title">Book An Appointment</h2>
+        <hr>
+    </div>
+
+    <div class="container d-flex justify-content-center" style="max-width: 800px; min-width: 400px;">
+        <form  ng-app="myApp" ng-controller="validateCtrl" 
+        name="myForm" novalidate>
+          <table width="800px" cellspacing="1" cellpadding="3">
+            <tr>
+              <td>Your Name</td>
+              <td>
+                <span>
+                  <input type="text" class="form-control" name="name" ng-model="name" placeholder="Insert Your Name" required>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <span style="color:red" ng-show="myForm.name.$dirty && myForm.name.$invalid">
+                  <span ng-show="myForm.name.$error.required">Name is required.</span>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td>Phone Number</td>
+              <td>
+                <input type="input" class="form-control" maxlength="14" size="14" name="phone"  ng-model="phone" placeholder="Insert Your PhoneNumber/WhatsApp Number" required>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <span style="color:red" ng-show="myForm.phone.$dirty && myForm.phone.$invalid">
+                  <span ng-show="myForm.phone.$error.required">Phone Number is required.</span>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td>Booking For</td>
+              <td>
+                <select class="form-control">
+                  <option>Choose One....</option>
+                  <option>1.Paket Resepsi</option>
+                  <option>2.Paket Prewedding</option>
+                  <option>3.Paket Studio</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Book Date</td>
+              <td>
+                <input class="form-control" type="Date" name="">
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Package</td>
+              <td>
+                <select class="form-control">
+                  <option>Choose One...</option>
+                  <option>1.Paket Resepsi - Ekonomis</option>
+                  <option>2.Paket Resepsi - Kolase Minimalis</option>
+                  <option>3.Paket Resepsi - Regular</option>
+                  <option>4.Paket Resepsi - Exclusive</option>
+                  <option>5.Paket Prewedding - 1A</option>
+                  <option>6.Paket Prewedding - 2A</option>
+                  <option>7.Paket Prewedding - 3A</option>
+                  <option>8.Paket Prewedding - 1B</option>
+                  <option>9.Paket Prewedding - 2B</option>
+                  <option>10.Paket studio - Single</option>
+                  <option>11.Paket studio - Group(Pelajar)</option>
+                  <option>12.Paket studio - Keluarga/Mahasiswa/Umum</option>
+                  <option>13.Paket studio - Keluarga 1</option>
+                  <option>14.Paket studio - Keluarga 2</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <?php if (isset($success)) {
+                if ($success==true) { ?>
+            <? } else { ?>
+            <?php } } ?>
+              <td></td>
+              <td>
+                <div class="g-recaptcha" data-sitekey="6LdN21wUAAAAAFr7B4J_mjdCs7Vw9LlHpYpdt3oO"></div>
+              </td>
+            </tr>
+          </table>
+          <div class="d-flex justify-content-end">
+            <a href="index.html">
+            <button class="btn btn-danger" type="button" style="margin: 10px" ng-disabled="myForm.name.$dirty && myForm.name.$invalid || myForm.phone.$dirty && myForm.phone.$invalid">Cancle</button>
+          </a>
+            <input class="btn btn-secondary" value="Submit" type="submit" style="margin: 10px" ng-disabled="myForm.name.$dirty && myForm.name.$invalid || myForm.phone.$dirty && myForm.phone.$invalid">
+          </div>
+        </form>
+        <script>
+          var app = angular.module('myApp', []);
+          app.controller('validateCtrl', function($scope) {
+            $scope.name = '';
+            $scope.phone = '';
+          });
+        </script>
+    </div>
+
+    <div class="container-fluid footer">
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div style="margin-bottom:0px;">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html" style="color:#717171;">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="faq.html" style="color:#717171;">FAQ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="euforia.html" style="color:#717171;">Euforia Career</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Ado_02.html" style="color:#717171;">Member</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <hr style="width:97%;margin-top:0px;margin-bottom:7px;">
+        <div class="justify-content-end footer_ikon" style="margin-top:0px;margin-right:22px;">
+            <div>
+                <a href="https://api.whatsapp.com/send?phone=+62895323338719&text=hai%20kakak,%20Namaku%20:%20" class="icon-footer" target="blank">
+                    <img src="assets/img/icon_whatsapp_white.png" class="icon-logo-footer">
+                </a>
+            </div>
+            <div>
+                <a href="https://www.instagram.com/euforia_creative_photography" class="icon-footer" target="blank">
+                    <img src="assets/img/icon_instagram_white.png" class="icon-logo-footer">
+                </a>
+            </div>
+            <div>
+                <a href="https://www.facebook.com/euforiastudio" class="icon-footer" target="blank">
+                    <img src="assets/img/icon_facebook_white.png" class="icon-logo-footer">
+                </a>
+            </div>
+            <div>
+                <a href="mailto:zainal.makhasin@gmail.com?subject=Question-From-Web" class="icon-footer" target="blank">
+                    <img src="assets/img/icon_gmail_white.png" class="icon-logo">
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    
+</body>
+
+</html>
